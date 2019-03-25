@@ -1,3 +1,35 @@
+body{
+    /* background: url("../images/Avengers.jpg") no-repeat center center fixed; */
+    /* background: url("../images/marvel.background.png") no-repeat center center fixed; */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 20px;
+    
+}
+
 img{
     max-height:150px;
+}
+
+form,
+.queryBtn {
+    background-color: #474747;
+    color: white;
+}
+
+#superHeroButtons {
+    margin: 10px;
+}
+
+.theBtn{
+    padding: 6px;
+    margin: 3px;
+}
+
+
+#addSearchInput {
+    color: black;
 }
