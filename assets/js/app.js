@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    //the object that hold all relevent information
     var gifData = {
         superHeroNames: [
             { queryName: "Superman", timesSearched: 0 }, 
@@ -38,22 +38,25 @@ $(document).ready(function () {
     }
 
     main();
-
+    //this does everything
     function main() {
         buildHtml();
         populateButtons();
     }
-
+    //builds my html with jQuery
     function buildHtml() {
-        // var newDiv = $("<div>");
-        // newDiv.html("Movie Title: ");
+        //building the jumbotron
+        $(".container").append($("<div>").addClass("jumbotron").attr("id", "mybanner"));
+        $("#mybanner").append($("<h1>").addClass("display-3").html("Giftastic"));
+        $("#mybanner").append($("<p>").addClass("lead").html("Click any button below to see some awesome Gifs! Or add your own button!"))
+        //building the buttons
         $(".container").append($("<div>").addClass("row").attr("id", "forButtons"));
         $("#forButtons").append($("<div>").attr("id", "superHeroButtons"));
-
+        //buildign the display for the images
         $(".container").append($("<div>").addClass("row").attr("id", "forImgDisplay"));
         $("#forImgDisplay").append($("<div>").addClass("col-lg-9"));
         $(".col-lg-9").append($("<div>").addClass("display"));
-
+        //building the form for new query input
         $("#forImgDisplay").append($("<div>").addClass("col-lg-3").attr("id", "forInput"));
         $("#forInput").append($("<form>").attr("id", "text-form"))
         $("#text-form").append($("<label>").attr({ for: "newTextInput", id: "serachLabel" }));
@@ -61,25 +64,24 @@ $(document).ready(function () {
         $("#text-form").append($("<input>").attr({ type: "text", id: "newSearchTerm" }))
         $("#text-form").append($("<br>"));
         $("#text-form").append($("<input>").attr({ id: "addSearchInput", type: "submit", value: "Submit" }));
-
     }
-
+    //populate the buttons from gifdata array
     function populateButtons() {
         $("#superHeroButtons").empty();
         for (let i = 0; i < gifData.superHeroNames.length; i++) {
-            $("#superHeroButtons").append($("<button>").text(gifData.superHeroNames[i].queryName).addClass("theBtn button-primary").attr("data-name", gifData.superHeroNames[i].queryName).attr("data-number", gifData.superHeroNames[i].timesSearched));
+            $("#superHeroButtons").append($("<button>").text(gifData.superHeroNames[i].queryName).addClass("theBtn").attr("data-name", gifData.superHeroNames[i].queryName).attr("data-number", gifData.superHeroNames[i].timesSearched));
         }
     }
+    //when you click the button 
     $(document).on("click", ".theBtn", function () {
-        // $(".display").empty();
-        let i = $(this).data("number");
-        // console.log(i);
+        // let i = $(this).data("number");
         createUrl($(this).data("name"), $(this).data("number"));
         searchAndUpdateQueryTimes($(this).data("name"));
-
         makeAPICall();
     });
-
+    //THis is where we capture and update if the query has been searched
+    //if it is then update the button object and search number so we can 
+    //request correct query next time
     function searchAndUpdateQueryTimes(clickedQuery){
         for (let i = 0; i < gifData.superHeroNames.length; i++) {
             if(gifData.superHeroNames[i].queryName === clickedQuery){
@@ -88,14 +90,12 @@ $(document).ready(function () {
             }
         }
     }
-
+    //function to create our URL for the api call
     function createUrl(queryString, timesSearched) {
         offsetValue = timesSearched*10;
-        // gifData.giphyUrl = "http://api.giphy.com/v1/gifs/search?q=super+hero+" + queryString + "&limit=10&api_key=" + gifData.apiKey;
         gifData.giphyUrl = "http://api.giphy.com/v1/gifs/search?q=" + queryString + "&limit=10&offset="+ offsetValue +"&api_key=" + gifData.apiKey;
-        console.log(gifData.giphyUrl);
     }
-
+    //function to call the API
     function makeAPICall() {
         // createUrl(queryString);
         $.ajax({
@@ -105,7 +105,7 @@ $(document).ready(function () {
             displayGiphys(response);
         });
     }
-
+    // this is where we display all the Gifs
     function displayGiphys(response) {
         console.log(response);
         $.each(response.data, function (index, value) {
@@ -124,28 +124,20 @@ $(document).ready(function () {
             $(".display").prepend(fullGifDisplay);
 
         });
-
     }
-
+    //hover effects from pause -> animated
     $(document).on("mouseover", ".hoverEffect", function () {
         $(this).attr("src", $(this).data("animated"));
     })
-
+    //hover effects from animated -> pause
     $(document).on("mouseleave", ".hoverEffect", function () {
         $(this).attr("src", $(this).data("paused"));
     })
-
+    //form logic. this is where we implement our input
     $('#addSearchInput').on('click', function () {
         var newQuery = $('#newSearchTerm').val().trim();
         gifData.superHeroNames.push({queryName: newQuery, timesSearched: 0});
-        // buildHtml();
         populateButtons();
         return false;
     });
-
-
-
-
-
-
 });
