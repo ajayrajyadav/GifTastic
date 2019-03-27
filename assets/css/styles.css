@@ -13,6 +13,10 @@ body{
 img{
     max-height:150px;
 }
+form {
+    padding: 10px;
+}
+
 
 form,
 .queryBtn {
@@ -32,4 +36,14 @@ form,
 
 #addSearchInput {
     color: black;
+}
+
+.ratingStyle {
+    color: white;
+    background-color: black;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
 }
