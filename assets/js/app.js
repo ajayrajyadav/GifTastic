@@ -43,6 +43,8 @@ $(document).ready(function () {
         buildHtml();
         populateButtons();
     }
+
+
     //builds my html with jQuery
     function buildHtml() {
         //building the jumbotron
@@ -64,6 +66,16 @@ $(document).ready(function () {
         $("#text-form").append($("<input>").attr({ type: "text", id: "newSearchTerm" }))
         $("#text-form").append($("<br>"));
         $("#text-form").append($("<input>").attr({ id: "addSearchInput", type: "submit", value: "Submit" }));
+        buildFooter();
+    }
+
+    function buildFooter(){
+        let logoImage = $("<img>").attr("src", "./assets/images/dev-logo-lg.gif").attr({width: "241px", height: "27px", href: "https://developers.giphy.com/"});
+        $("body").append($("<footer>").addClass("footer navbar-fixed-bottom").attr("id", "giphyFooter"));
+        $("#giphyFooter").append($("<div>").addClass("text-center footer-copyright").attr("id","logoDiv"));
+        $("#logoDiv").append($("<a>").attr("href", "https://developers.giphy.com/").html("Powered By "));
+        $("#logoDiv").append(logoImage);
+
     }
     //populate the buttons from gifdata array
     function populateButtons() {
