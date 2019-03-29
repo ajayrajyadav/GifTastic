@@ -20,12 +20,9 @@ $(document).ready(function () {
             { queryName: "Drax", timesSearched: 0 }, 
             { queryName: "Groot", timesSearched: 0 }, 
             { queryName: "Thor", timesSearched: 0 }, 
-            { queryName: "Doctor Strange", timesSearched: 0 }, 
-            { queryName: "Vision", timesSearched: 0 }, 
-            { queryName: "Scrlet Witch", timesSearched: 0 }, 
+            { queryName: "Doctor Strange", timesSearched: 0 },
             { queryName: "Winter Soldier", timesSearched: 0 }, 
-            { queryName: "Loki", timesSearched: 0 }, 
-            { queryName: "Hela", timesSearched: 0 }, 
+            { queryName: "Loki", timesSearched: 0 },
             { queryName: "Pepper Potts", timesSearched: 0 }, 
             { queryName: "Star Lord", timesSearched: 0 }
         ],
@@ -105,7 +102,7 @@ $(document).ready(function () {
     //function to create our URL for the api call
     function createUrl(queryString, timesSearched) {
         offsetValue = timesSearched*10;
-        gifData.giphyUrl = "http://api.giphy.com/v1/gifs/search?q=" + queryString + "&limit=10&offset="+ offsetValue +"&api_key=" + gifData.apiKey;
+        gifData.giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + queryString + "&limit=10&offset="+ offsetValue +"&api_key=" + gifData.apiKey;
     }
     //function to call the API
     function makeAPICall() {
